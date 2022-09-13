@@ -11,4 +11,16 @@ public class DemoController {
         model.addAttribute("data", "hello!!");
         return "hello"; //.../resources/templates/hello.html 반환(실행)
     }
+
+    @GetMapping("test")
+    public String test(Model model){
+        model.addAttribute("testData", "Test...");
+        return "test";
+    }
+
+    @GetMapping("demo")
+    public String demo(Model model){
+        model.addAttribute("DData", "Spring boot practice\n");
+        return "demo";
+    }
 }

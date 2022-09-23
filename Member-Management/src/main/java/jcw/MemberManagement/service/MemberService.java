@@ -2,15 +2,20 @@ package jcw.MemberManagement.service;
 
 import jcw.MemberManagement.domain.Member;
 import jcw.MemberManagement.repository.MemberRepository;
-import jcw.MemberManagement.repository.MemoryMemberRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class MemberService {
 
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    /*private final MemberRepository memberRepository = new MemoryMemberRepository();
+        -> 테스트케이스에서 다른 memberRepository로 하게 되는 것이기 때문에 아래처럼*/
+
+    private final MemberRepository memberRepository;
+
+    public MemberService(MemberRepository memberRepository) { //Dependency Injection(DI)
+        this.memberRepository = memberRepository;
+    }
 
     /**
      * 회원 가입

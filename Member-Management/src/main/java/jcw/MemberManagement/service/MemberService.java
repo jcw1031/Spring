@@ -29,7 +29,6 @@ public class MemberService {
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         });
         */
-
         //위의 코드도 가능하지만 아래가 깔끔하게 가능
 
         validateDuplicatieMember(member);

@@ -2,10 +2,13 @@ package jcw.MemberManagement.service;
 
 import jcw.MemberManagement.domain.Member;
 import jcw.MemberManagement.repository.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service //스프링 빈으로 관리하도록 설정
 public class MemberService {
 
     /*private final MemberRepository memberRepository = new MemoryMemberRepository();
@@ -13,6 +16,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
+    @Autowired
     public MemberService(MemberRepository memberRepository) { //Dependency Injection(DI)
         this.memberRepository = memberRepository;
     }

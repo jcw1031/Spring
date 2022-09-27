@@ -1,15 +1,18 @@
 package jcw.MemberManagement.controller;
 
 import jcw.MemberManagement.domain.Member;
+import jcw.MemberManagement.form.MemberForm;
+import jcw.MemberManagement.form.SearchForm;
 import jcw.MemberManagement.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller //객체를 생성하여 스프링이 갖고있는다. (스프링 빈이 관리된다고 표현)
 public class MemberController {
@@ -44,4 +47,20 @@ public class MemberController {
         model.addAttribute("members", members);
         return "members/memberList";
     }
+
+    @GetMapping("/members/search")
+    public String search(){
+        return "members/memberSearch";
+    }
+
+    @ResponseBody
+    @PostMapping("/members/search")
+    public Member search(SearchForm searchForm){
+        Optional<Member> member;
+        member = memberService.findOne(searchForm.getId());
+        System.out.println("member = "+member.get().getName());
+        return member.get();
+    }
+
+    
 }

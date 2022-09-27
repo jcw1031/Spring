@@ -1,4 +1,4 @@
-package jcw.MemberManagement.controller;
+package jcw.MemberManagement.form;
 
 public class MemberForm {
     private String name;

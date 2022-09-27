@@ -2,8 +2,6 @@ package jcw.MemberManagement.service;
 
 import jcw.MemberManagement.domain.Member;
 import jcw.MemberManagement.repository.MemberRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,17 +33,17 @@ public class MemberService {
         */
         //위의 코드도 가능하지만 아래가 깔끔하게 가능
 
-        validateDuplicatieMember(member);
+        validateDuplicateMember(member);
 
         memberRepository.save(member);
         return member.getId();
     }
 
-    /**같은 이름의 중복 회원이 가입되는 것 금지
+    /** 같은 이름의 중복 회원이 가입되는 것 금지
      *
      * @param member
      */
-    private void validateDuplicatieMember(Member member) {
+    private void validateDuplicateMember(Member member) {
         memberRepository.findByName(member.getName()) //null이 아니라 값이 있으면 로직이 동작 (Optional이기 때문에 가능)
                         .ifPresent(m -> {
                             throw new IllegalStateException("이미 존재하는 회원입니다.");

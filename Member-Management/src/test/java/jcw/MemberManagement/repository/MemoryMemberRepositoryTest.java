@@ -1,7 +1,6 @@
 package jcw.MemberManagement.repository;
 
 import jcw.MemberManagement.domain.Member;
-import jcw.MemberManagement.repository.MemoryMemberRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;

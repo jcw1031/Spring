@@ -1,3 +1,4 @@
+/*
 package jcw.MemberManagement;
 
 import jcw.MemberManagement.repository.JdbcTemplateMemberRepository;
@@ -17,14 +18,17 @@ public class SpringConfig {
         this.dataSource = dataSource;
     }
 
-    @Bean //스프링 빈에 등록
+ @Bean //스프링 빈에 등록
     public MemberService memberService(){
         return new MemberService(memberRepository());
     }
 
-    @Bean //스프링 빈에 등록
+
+@Bean //스프링 빈에 등록
     public MemberRepository memberRepository(){
         //return new MemoryMemberRepository();
         return new JdbcTemplateMemberRepository(dataSource);
     }
+
 }
+*/

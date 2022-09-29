@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -39,5 +42,18 @@ class MemberServiceIntegrationTest {
         memberService.join(member1);
         IllegalStateException e = assertThrows(IllegalStateException.class,
                 () -> memberService.join(member2));//예외가 발생해야 한다. assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
+    }
+
+    @Test
+    public void 아이디로검색() throws Exception{
+        //Given
+        Member member = new Member();
+        member.setId(100L);
+        member.setName("test");
+        //When
+        memberService.join(member);
+        Member search = memberService.findOne(100L).get();
+        //Then
+        assertThat(member.getName()).isEqualTo(search.getName());
     }
 }

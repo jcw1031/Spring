@@ -29,6 +29,5 @@ public class SpringConfig {
         //return new MemoryMemberRepository();
         return new JdbcTemplateMemberRepository(dataSource);
     }
-
 }
 */

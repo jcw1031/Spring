@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class IndexController {
 
-    @GetMapping("/join")
+    @GetMapping("/")
     public String join(){
         System.out.println("pass");
-        return "join";
+        return "index";
     }
 
     @GetMapping("/login")

@@ -12,9 +12,15 @@ public class MemberController {
     @Autowired
     MemberService memberService;
 
-    @RequestMapping(value = "joinUs.do", method = RequestMethod.POST)
-    public String joinUs(Member member){
+    @RequestMapping(value = "/joinUs.do", method = RequestMethod.POST)
+    public String joinUs(Member member) {
         memberService.joinMember(member);
-        return "join";
+        return "index";
+    }
+
+    @RequestMapping(value = "/login.do", method = RequestMethod.POST)
+    public String login(Member member){
+        System.out.println("member = " + member);
+        return "index";
     }
 }

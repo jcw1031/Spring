@@ -2,23 +2,24 @@ package com.example.youtube.service;
 
 import com.example.youtube.entity.Member;
 import com.example.youtube.repository.MemberRepository;
-import com.example.youtube.repository.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Service
-public class MemberService {
+public class MemberService{
+
+    @Autowired
     MemberRepository memberRepository;
 
-    public MemberService() {
+    /*public MemberService() {
         this.memberRepository = new MemoryMemberRepository();
-    }
+    }*/
 
-    public Member join(Member member) {
-        Member search = memberRepository.findById(member.getId());
-        if (!search.equals(null)) {
+    /*public Member join(Member member) {
+        Member search = memberRepository.findById(member.getMemberId());
+        if (search == null) {
             memberRepository.save(member);
             return member;
         } else {
@@ -40,5 +41,18 @@ public class MemberService {
     public List<Member> findAll(){
         List<Member> list = memberRepository.findAll();
         return list;
+    }*/
+
+    public void join(Member member) {
+        memberRepository.save(member);
+    }
+
+    public Member setProfile(String id, String name, String phone, String address) {
+        Member member = new Member();
+        member.setMemberId(id);
+        member.setMemberName(name);
+        member.setMemberPhone(phone);
+        member.setMemberAddress(address);
+        return member;
     }
 }

@@ -2,18 +2,28 @@ package com.example.youtube.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Getter @Setter
+@Entity
+@ToString
 public class Member {
-    private String id;
-    private String name;
-    private String phone;
-    private String address;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String memberId;
+    private String memberName;
+    private String memberPhone;
+    private String memberAddress;
 
-    public Member(String id, String name, String phone, String address) {
-        this.id = id;
-        this.name = name;
-        this.phone = phone;
-        this.address = address;
-    }
+    /*public Member(String memberId, String memberName, String memberPhone, String memberAddress) {
+        this.memberId = memberId;
+        this.memberName = memberName;
+        this.memberPhone = memberPhone;
+        this.memberAddress = memberAddress;
+    }*/
 }

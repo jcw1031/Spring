@@ -6,42 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MemberService{
 
     @Autowired
     MemberRepository memberRepository;
-
-    /*public MemberService() {
-        this.memberRepository = new MemoryMemberRepository();
-    }*/
-
-    /*public Member join(Member member) {
-        Member search = memberRepository.findById(member.getMemberId());
-        if (search == null) {
-            memberRepository.save(member);
-            return member;
-        } else {
-            System.out.println("이미 존재하는 아이디입니다.");
-            return null;
-        }
-    }
-
-    public Member findById(String id) {
-        Member member = memberRepository.findById(id);
-        return member;
-    }
-
-    public Member findByName(String name) {
-        Member member = memberRepository.findByName(name);
-        return member;
-    }
-
-    public List<Member> findAll(){
-        List<Member> list = memberRepository.findAll();
-        return list;
-    }*/
 
     public void join(Member member) {
         memberRepository.save(member);
@@ -54,5 +25,25 @@ public class MemberService{
         member.setMemberPhone(phone);
         member.setMemberAddress(address);
         return member;
+    }
+
+    public Optional<Member> findById(String id) {
+        return memberRepository.findById(id);
+    }
+
+    public Optional<Member> findByName(String name) {
+        return memberRepository.findByMemberName(name);
+    }
+
+    public List<Member> findAll(){
+        return memberRepository.findAll();
+    }
+
+    public void leave(Member member) {
+        memberRepository.delete(member);
+    }
+
+    public void clearAll() {
+        memberRepository.deleteAll();
     }
 }

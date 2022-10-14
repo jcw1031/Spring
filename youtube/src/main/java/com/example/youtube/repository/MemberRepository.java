@@ -4,6 +4,8 @@ import com.example.youtube.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface MemberRepository extends JpaRepository<Member, String> {
     /*public Member save(Member member);
@@ -13,4 +15,6 @@ public interface MemberRepository extends JpaRepository<Member, String> {
     public Member findByName(String name);
 
     public List<Member> findAll();*/
+
+    Optional<Member> findByMemberName(String name);
 }

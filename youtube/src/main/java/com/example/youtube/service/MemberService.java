@@ -12,7 +12,7 @@ import java.util.Optional;
 public class MemberService{
 
     @Autowired
-    MemberRepository memberRepository;
+    MemberRepository memberRepository;w
 
     public void join(Member member) {
         memberRepository.save(member);

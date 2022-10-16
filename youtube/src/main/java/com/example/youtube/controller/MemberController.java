@@ -5,6 +5,7 @@ import com.example.youtube.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,15 +17,26 @@ public class MemberController {
 
     /**
      * 회원가입
-     * @param id
-     * @param name
-     * @param phone
-     * @param address
+     * @param id String
+     * @param name String
+     * @param phone String
+     * @param address String
      */
-    @PostMapping("/user/{id}")
+    /*@PostMapping("/user/signup/{id}")
     public void postUserProfile(@PathVariable("id") String id, @RequestParam("name") String name, @RequestParam("phone") String phone, @RequestParam("address") String address) {
         Optional<Member> duplicate = memberService.findById(id);
-        System.out.println(duplicate);
+        if (duplicate.isEmpty()) {
+            Member member = memberService.setProfile(id, name, phone, address);
+            System.out.println(member.getMemberId());
+            memberService.join(member);
+        } else {
+            System.out.println("이미 존재하는 아이디입니다.");
+        }
+    }*/
+
+    @PostMapping("/user/signup")
+    public void postUserProfile(@RequestParam("id") String id, @RequestParam("name") String name, @RequestParam("phone") String phone, @RequestParam("address") String address) {
+        Optional<Member> duplicate = memberService.findById(id);
         if (duplicate.isEmpty()) {
             Member member = memberService.setProfile(id, name, phone, address);
             System.out.println(member.getMemberId());
@@ -39,7 +51,7 @@ public class MemberController {
      * @param id
      * @return
      */
-    @GetMapping("/user/{id}")
+    @GetMapping("/user/search//id/{id}")
     public Optional<Member> getUserProfileById(@PathVariable("id") String id) {
         Optional<Member> member = memberService.findById(id);
         return member;
@@ -50,7 +62,7 @@ public class MemberController {
      * @param name
      * @return
      */
-    @GetMapping("/user/name/{name}")
+    @GetMapping("/user/search/name/{name}")
     public Optional<Member> getUserProfileByName(@PathVariable("name") String name) {
         Optional<Member> member = memberService.findByName(name);
         if(member.isPresent()) {
@@ -66,7 +78,7 @@ public class MemberController {
      * 모든 사용자 검색
      * @return
      */
-    @GetMapping("/user/all")
+    @GetMapping("/user/search/all")
     public List<Member> getUserProfileList() {
         List<Member> list = memberService.findAll();
         return list;
@@ -74,24 +86,25 @@ public class MemberController {
 
     /**
      * 회원 정보 수정
-     * @param id
-     * @param name
-     * @param phone
-     * @param address
+     * @param id String
+     * @param name String
+     * @param phone String
+     * @param address String
      */
-    @PutMapping("/user/{id}")
+    @PutMapping("/user/update/{id}")
     public void updateUserProfile(@PathVariable("id") String id, @RequestParam("name") String name, @RequestParam("phone") String phone, @RequestParam("address") String address) {
         Optional<Member> optionalMember = memberService.findById(id);
         optionalMember.get().setMemberName(name);
         optionalMember.get().setMemberPhone(phone);
         optionalMember.get().setMemberAddress(address);
+        memberService.join(optionalMember.get());
     }
 
     /**
      * 회원 탈퇴
      * @param id
      */
-    @DeleteMapping("/user/{id}")
+    @DeleteMapping("/user/delete/{id}")
     public void deleteUserProfile(@PathVariable("id") String id) {
         Optional<Member> member = memberService.findById(id);
         if(member.isPresent()){

@@ -12,7 +12,7 @@ import java.util.Optional;
 public class MemberService{
 
     @Autowired
-    MemberRepository memberRepository;w
+    MemberRepository memberRepository;
 
     public void join(Member member) {
         memberRepository.save(member);
@@ -41,9 +41,5 @@ public class MemberService{
 
     public void leave(Member member) {
         memberRepository.delete(member);
-    }
-
-    public void clearAll() {
-        memberRepository.deleteAll();
     }
 }

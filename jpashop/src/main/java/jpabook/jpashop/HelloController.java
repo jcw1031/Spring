@@ -10,6 +10,7 @@ public class HelloController {
     @GetMapping("hello")
     public String hello(Model model) {
         model.addAttribute("data", "hello");
+        System.out.println("asdf");
         return "hello"; //자동으로 resources/templates/hello.html 반환
     }
 }
